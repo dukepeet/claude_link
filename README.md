@@ -90,9 +90,14 @@ This section is what your threads read. It governs the data repo.
 Your project's folder is `contexts/<project>/`, named in the project
 instructions. Write only inside it. Never add, edit, or delete anything
 outside it on your own initiative — another project's folder, or the repo
-root — even to correct something that looks stale. Report it to the user
-and let them decide. Edit outside your own folder only when the user asks
-for it, and only what they asked for.
+root — even to correct something that looks stale.
+
+Report it to the user, name the thread that owns it, and offer to write a
+handoff instead of doing the work. If the user tells you to do it here
+anyway, do it — but make the offer first, every time. Approval is not the
+test at this boundary; ownership is. Asking "may I?" invites yes, and a
+thread that keeps asking absorbs another thread's work one approval at a
+time.
 
 **Fetch before every push.** `push_files` overwrites whatever is on
 `main`. There are no branches and no PRs here, so nothing surfaces a
@@ -106,9 +111,10 @@ in the same thread may already be stale.
 context file, push it in the same turn — do not wait for the user to say
 "dump". "dump" stays valid as a manual catch-up for anything missed.
 
-1. List `contexts/<project>/` before the thread's first push. Reuse
-   existing filenames exactly; never invent a variant of a name already
-   there.
+1. List `contexts/<project>/` and `contexts/<project>/handoffs/` before
+   the thread's first push. Reuse existing filenames exactly; never invent
+   a variant of a name already there. Mention any handoffs you find — you
+   cannot tell which are addressed to you, so let the user say.
 2. Re-fetch every existing file you are about to overwrite, in the same
    turn as the push. A copy you read earlier in the thread does not count
    — re-read it.
@@ -116,11 +122,28 @@ context file, push it in the same turn — do not wait for the user to say
    it.
 4. Use `push_files` — one commit, no blob SHA needed for overwrites.
    Message: `context dump <date>`.
-5. Never create branches or PRs. Never delete files.
+5. Never create branches or PRs. Never delete files, except an actioned
+   handoff addressed to you.
 6. Reply with paths written, flagging any that already existed.
 
 Never put credentials, tokens, or machine-specific paths in the data repo.
 Those live in the sync folder on the PC, which no repo can see.
+
+### Handoffs
+
+A note from one thread to another in the same project, living in
+`contexts/<project>/handoffs/`. It is how work that belongs elsewhere
+moves without the raising thread doing it.
+
+- Filename is `<owner>--<subject>.md`. The owner is the recipient, since
+  the folder narrows to a project and not to a thread; the sender goes in
+  the body.
+- Create, do not edit. A handoff you did not write is not yours to
+  rewrite — raise a new one instead. Create-only means there is no way to
+  clobber someone else's.
+- Delete it once actioned. Git keeps the history.
+- The owner name should read as a topic, so a thread that does not exist
+  yet can still be the recipient.
 
 ### Writing straight to the PC
 
