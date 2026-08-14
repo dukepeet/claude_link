@@ -22,6 +22,20 @@ the data is private, and the credential plus the machine-specific paths
 stay on the machine that needs them. Nothing personal is ever committed
 anywhere public, and no repo holds a token.
 
+## If you are forking this
+
+The script updates itself on every pull, from the URL in its own
+`$engineUrl`. That URL points at **this** repo. So a copy taken as-is
+keeps pulling my script onto your machine forever — quietly overwriting
+any change you make to your fork, and running whatever I push here.
+
+Before you run anything, edit `$engineUrl` at the top of
+`pull-context.ps1` to point at your own fork, and fetch from your fork in
+step 3 below. Then the loop closes on you rather than on me. Do the same
+with the `dukepeet/claude_link` reference in the project-instructions stub
+in step 6 — that one only decides which README your threads read, so it is
+harmless either way, but consistency beats surprise later.
+
 ## Setup
 
 **1. Create a private data repo.** Initialize it with a README so it has a
@@ -34,7 +48,7 @@ through this token.
 
 **3. Bootstrap the PC.** Single-line commands, one at a time, in
 PowerShell. Replace `C:\claude-sync` with wherever you want the sync
-folder.
+folder, and `dukepeet/claude_link` with your fork.
 
     New-Item -ItemType Directory -Force C:\claude-sync | Out-Null; "PASTE_PAT" | Set-Content C:\claude-sync\pat.txt
 
@@ -54,8 +68,8 @@ should land locally.
 and `OK`.
 
 Only the script fetch is ever needed again, and not even that: after the
-first run the script replaces itself from this repo on every pull, so a
-change pushed here is the whole deployment.
+first run the script replaces itself from its `$engineUrl` on every pull,
+so a change pushed there is the whole deployment.
 
 **6. Point each Claude project at its folder.** In the project's
 instructions:
@@ -129,9 +143,9 @@ folder, downloads the data repo's zipball, and robocopies each project
 folder to its mapped local path. The config is `.psd1` rather than `.ps1`
 on purpose: it is parsed as data, so it can never execute anything.
 
-It then updates itself from this repo — an unauthenticated fetch, since
-this repo is public — comparing hashes and overwriting only on a
-difference.
+It then updates itself from `$engineUrl` — an unauthenticated fetch, since
+that repo is public — comparing hashes and overwriting only on a
+difference. See "If you are forking this" above.
 
 `$keep` is the counterweight to `/MIR`, which is `/E` plus `/PURGE`: it
 deletes anything in a destination that the matching project folder does
