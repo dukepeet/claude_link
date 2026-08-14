@@ -3,13 +3,15 @@
 Ground rule 5 of `synth-learning-plan.md`, one file for all stages.
 **Terse bullets, settled conclusions only** — no progress notes, no prose.
 If it isn't worth re-reading in six months, it doesn't go in.
-Each entry is dated, with session length where known.
+
+Entry heading format: `SxNN · what was covered · date · duration`,
+where S is the stage and NN the session within it.
 
 ---
 
 ## Stage 1 — subtractive spine (Vital)
 
-### Ex 1 — waveform vocabulary · 2026-08-14
+### 1x01 · Ex 1, waveform vocabulary · 2026-08-14 · ~1h
 
 - Waveform = a recipe for how loud each harmonic is. Sine's has one ingredient.
 - Note-on transient is its own event, separate from steady state — add attack to compare waveforms fairly. **Init attack stays 0**; 20 ms would fight Ex 3's pluck and Ex 5's sub. Anti-click, if ever wanted: 1–3 ms.
