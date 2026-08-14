@@ -9,24 +9,18 @@ if (Get-Variable PSNativeCommandUseErrorActionPreference -EA 0) {
   $PSNativeCommandUseErrorActionPreference = $false
 }
 
-# ---- configure these two ----------------------------------------------------
+# Canonical home of this script. Public, so fetching it needs no token.
+$engineUrl = "https://raw.githubusercontent.com/dukepeet/claude_link/main/pull-context.ps1"
 
-$repo = "you/your-context-repo"
+# Everything machine-specific lives beside this script, never in a repo:
+# the token, and the config naming the data repo and where each project lands.
+$patFile = Join-Path $PSScriptRoot "pat.txt"
+$cfgFile = Join-Path $PSScriptRoot "sync-config.psd1"
+$log     = Join-Path $PSScriptRoot "pull-problems.log"
 
-# project folder in repo  ->  local destination
-$map = @{
-  "example" = "C:\path\to\wherever\you\want\it"
-}
-
-# -----------------------------------------------------------------------------
-
-$log = Join-Path $PSScriptRoot "pull-problems.log"
-
-# Files that live in a destination but are not in the matching contexts/ folder.
-# /MIR would delete them. Harmless if your destinations are separate from the
-# folder this script runs from; essential if any destination IS that folder,
-# because pat.txt would be the first thing to go.
-$keep = @("pat.txt", "pull-problems.log", "pull-context.ps1")
+# Local-only files that no contexts/ folder holds, so /MIR must not purge them.
+# sync-config.psd1 can add more via its own keep entry.
+$keep = @("pat.txt", "sync-config.psd1", "pull-problems.log", "pull-context.ps1")
 
 # Say  -> console only. A pull that worked leaves no trace on disk.
 # Flag -> console and the log. Problems only, so the log is all signal.
@@ -39,10 +33,18 @@ function Flag($msg) {
 
 $failed = $null
 try {
-  $patFile = Join-Path $PSScriptRoot "pat.txt"
-  if (-not (Test-Path $patFile))          { throw "pat.txt not found next to the script" }
+  if (-not (Test-Path $patFile)) { throw "pat.txt not found next to the script" }
+  if (-not (Test-Path $cfgFile)) { throw "sync-config.psd1 not found next to the script" }
+
   $pat = (Get-Content $patFile -Raw).Trim()
   if ([string]::IsNullOrWhiteSpace($pat)) { throw "pat.txt is empty" }
+
+  # .psd1 rather than .ps1: parsed as data, so config can never execute anything
+  $cfg = Import-PowerShellDataFile $cfgFile
+  $repo = "$($cfg.repo)".Trim()
+  if ($repo -notmatch '^[\w.-]+/[\w.-]+$')   { throw "sync-config.psd1: repo should be owner/repo" }
+  if (-not $cfg.map -or $cfg.map.Count -eq 0) { throw "sync-config.psd1: map has no entries" }
+  if ($cfg.keep) { $keep = @($keep + $cfg.keep) | Select-Object -Unique }
 
   $tmp = "$env:TEMP\ctx"
   Remove-Item $tmp, "$tmp.zip" -Recurse -Force -EA 0
@@ -50,31 +52,31 @@ try {
   Expand-Archive "$tmp.zip" $tmp -Force
   $src = (Get-ChildItem $tmp -Directory)[0].FullName
 
-  foreach ($k in $map.Keys) {
+  foreach ($k in $cfg.map.Keys) {
+    $dest = $cfg.map[$k]
     $from = Join-Path $src "contexts\$k"
     if (Test-Path $from) {
-      robocopy $from $map[$k] /MIR /XF $keep /R:1 /W:1 /NFL /NDL /NJH /NJS /NP | Out-Null
+      robocopy $from $dest /MIR /XF $keep /R:1 /W:1 /NFL /NDL /NJH /NJS /NP | Out-Null
       if ($LASTEXITCODE -ge 8) { throw "robocopy failed for $k (exit $LASTEXITCODE)" }
-      Say "$k -> $($map[$k])  ($((Get-ChildItem $map[$k] -File).Count) files)"
+      Say "$k -> $dest  ($((Get-ChildItem $dest -File).Count) files)"
     } else {
-      # mapped but absent from the repo: not fatal, but someone should know
+      # mapped but absent from the data repo: not fatal, but someone should know
       Flag "$k -> no folder in repo, skipped"
     }
   }
 
-  # The script deploys itself: the zipball just unpacked contains the root copy,
-  # so a change pushed to the repo reaches the PC with no manual step. Best effort
-  # -- a failure here must not fail the pull, and the next run retries.
+  # Self-update from the public repo. Best effort: a failure here must not fail the
+  # pull, and the next run retries.
   try {
-    $new = Join-Path $src "pull-context.ps1"
-    $me  = Join-Path $PSScriptRoot "pull-context.ps1"
-    if (Test-Path $new) {
-      if ((Get-FileHash $new).Hash -ne (Get-FileHash $me).Hash) {
-        Copy-Item $new $me -Force
-        Say "script updated from repo root"
-      }
-    } else {
-      Flag "script not found at repo root, self-update skipped"
+    $fresh = "$env:TEMP\pull-context.new"
+    Remove-Item $fresh -Force -EA 0
+    Invoke-WebRequest $engineUrl -OutFile $fresh
+    $me = Join-Path $PSScriptRoot "pull-context.ps1"
+    if ((Get-Item $fresh).Length -lt 500) {
+      Flag "self-update skipped: fetched script looks truncated"
+    } elseif ((Get-FileHash $fresh).Hash -ne (Get-FileHash $me).Hash) {
+      Copy-Item $fresh $me -Force
+      Say "script updated from the public repo"
     }
   } catch {
     Flag "self-update skipped: $($_.Exception.Message)"
