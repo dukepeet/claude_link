@@ -12,6 +12,14 @@ puts that next to something you already do.
 Your project's folder is `contexts/<project>/`, named in the project
 instructions.
 
+**The repo is the only store.** Context files live there, and on the user's PC
+via the pull. Never write them into the claude.ai project's knowledge: nothing
+syncs the two, so a copy there goes stale the moment the repo moves on, and it
+sits in the system prompt of every conversation in the project where it
+misinforms rather than merely going unused. Anything you find there is a
+leftover. A project whose knowledge holds no context files is correct, not
+damaged.
+
 **Stay in your folder.** Never add, edit, or delete anything outside it on your
 own initiative — another project's folder, or the repo root — even to correct
 something that looks stale. Report it, name the thread that owns it, and offer
