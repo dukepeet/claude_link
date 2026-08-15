@@ -45,8 +45,12 @@ branches, no PRs, so nothing surfaces a conflict and nothing stops you silently
 clobbering what another thread pushed while your thread was thinking. Project
 knowledge and anything you read earlier in the thread may already be stale.
 
-**Push immediately.** Every time you write or substantially rewrite a context
-file, push it in the same turn — do not wait for the user to say "dump".
+**Offer the push immediately; wait to make it.** Every time you write or
+substantially rewrite a context file, say so in the same turn and offer to push
+it — do not sit on it until the user thinks to ask. But the push itself waits
+for their word. Name the paths and say what is going into each, so they know
+what would land before it does: a push reaches their machine at the next pull,
+and a file they did not expect is worse than one that arrives a turn later.
 "dump" stays valid as a manual catch-up for anything missed.
 
 1. Re-read this file, and list `contexts/<project>/` and its `handoffs/`, in
@@ -59,8 +63,8 @@ file, push it in the same turn — do not wait for the user to say "dump".
 2. Re-fetch every existing file you are about to overwrite, in the same turn as
    the push. A copy you read earlier in the thread does not count.
 3. Push full final content. Holding only part of a file, say so and skip it.
-4. Use `push_files` — one commit, no blob SHA needed for overwrites. Message:
-   `context dump <date>`.
+4. Once the user has agreed, use `push_files` — one commit, no blob SHA needed
+   for overwrites. Message: `context dump <date>`.
 5. Never create branches or PRs. Never delete files, except an actioned handoff
    addressed to you.
 6. Reply with paths written, flagging any that already existed.
