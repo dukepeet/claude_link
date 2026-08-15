@@ -17,8 +17,7 @@ The repo is authoritative: files not in it get wiped locally.
 
 The split is the point: public code that says nothing about you, private data,
 and the token plus machine-specific paths staying on the machine that needs
-them. No repo holds a token. Nothing about how you use this needs to be
-public, so there is no reason to fork it — see below.
+them. No repo holds a token.
 
 ## Self-update
 
@@ -35,7 +34,7 @@ machine without you doing anything. Decide which you want:
 
 The setting lives in the config rather than in the script because the script
 overwrites itself — a value edited into the script would be undone on the next
-pull. That is also the only thing a fork was ever needed for.
+pull.
 
 ## Setup
 
