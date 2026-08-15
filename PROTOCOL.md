@@ -4,6 +4,11 @@ This is what a Claude thread reads and follows. It governs the private data
 repo that holds context files — one folder per project, mirrored to a PC by
 `pull-context.ps1`. See [README.md](README.md) for how the sync works.
 
+This file changes. A conversation can outlive several versions of it, and
+nothing announces an edit, so a copy you read earlier in the thread may already
+be wrong. Re-read it in any turn where you touch context files — step 1 below
+puts that next to something you already do.
+
 Your project's folder is `contexts/<project>/`, named in the project
 instructions.
 
@@ -30,7 +35,8 @@ knowledge and anything you read earlier in the thread may already be stale.
 file, push it in the same turn — do not wait for the user to say "dump".
 "dump" stays valid as a manual catch-up for anything missed.
 
-1. List `contexts/<project>/` and its `handoffs/` before your first push. Reuse
+1. Re-read this file, and list `contexts/<project>/` and its `handoffs/`, in
+   every turn where you touch context files — not just the first. Reuse
    existing filenames exactly; never invent a variant of a name already there.
    Mention any handoffs you find — you cannot tell which are addressed to you,
    so let the user say. If the folder has a `README.md`, read it before adding,

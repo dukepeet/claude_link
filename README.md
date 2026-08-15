@@ -115,13 +115,15 @@ Customize → Connectors limits what the connector can do, though not where.
     If the tools are unavailable, say so before anything else and stop —
     do not answer from memory. This conversation cannot see the context
     files, and nothing in this prompt substitutes for them.
-    Before any context file work, read PROTOCOL.md from dukepeet/claude_link
-    and follow it.
+    Read PROTOCOL.md from dukepeet/claude_link and follow it, in every turn
+    where you touch context files — it changes, and a copy you read earlier
+    in this conversation does not count.
 
 The stub has to name the connector, because the file it points at is unreadable
-until the connector works. The stop instruction matters because the failure is
-otherwise silent: a thread with no tools answers plausibly from general
-knowledge and nothing looks wrong.
+until the connector works. It also has to demand the re-read: these
+instructions are the only thing re-injected on every turn, so a conversation
+that started before a protocol change will otherwise keep following the version
+it read once and never notice.
 
 Do not keep copies of the context files in the project's knowledge. A thread
 reads the repo, so a second copy serves only a surface where the connector is
