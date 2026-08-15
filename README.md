@@ -112,11 +112,25 @@ Customize → Connectors limits what the connector can do, though not where.
     Context project: myproject (contexts/myproject/ in you/your-context-data).
     Requires the GitHub connector. If its tools are missing, enable it for
     this conversation.
+    If the tools are unavailable, say so before anything else and stop —
+    do not answer from memory. This conversation cannot see the context
+    files, and nothing in this prompt substitutes for them.
     Before any context file work, read PROTOCOL.md from dukepeet/claude_link
     and follow it.
 
-The stub has to name the connector, because the file it points at is
-unreadable until the connector works.
+The stub has to name the connector, because the file it points at is unreadable
+until the connector works. The stop instruction matters because the failure is
+otherwise silent: a thread with no tools answers plausibly from general
+knowledge and nothing looks wrong.
+
+Do not keep copies of the context files in the project's knowledge. A thread
+reads the repo, so a second copy serves only a surface where the connector is
+unavailable — and it has to be maintained by hand, drifts silently when someone
+forgets, and sits in the system prompt of every conversation in the project,
+where a stale copy misinforms rather than merely going unused. If you do work
+somewhere connector-less often enough to want a copy, add the data repo through
+the project knowledge section and scope it to that project's folder, so the
+copy is generated and refreshed with one button rather than typed.
 
 ## How the sync works
 
@@ -142,6 +156,13 @@ this exists to name the day your PAT expires.
 
 Run it from the desktop shortcut instead and you get the console, which reports
 each project as it syncs.
+
+### When a thread cannot reach the repo
+
+The stub tells it to stop, but that is a self-report and will sometimes fail.
+The reliable tell is on your side: a thread that answers a question about
+project context without a visible tool call has not read anything, whatever it
+says about itself.
 
 ### Notes
 
