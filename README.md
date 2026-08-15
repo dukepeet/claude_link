@@ -19,6 +19,10 @@ The split is the point: public code that says nothing about you, private data,
 and the token plus machine-specific paths staying on the machine that needs
 them. No repo holds a token.
 
+The two directions authenticate differently. Threads push through a GitHub
+connector in Claude, authorized as your GitHub account. The PC pulls with a
+fine-grained token that only needs read. Nothing needs a read-write token.
+
 ## Self-update
 
 By default the script re-fetches itself from this repo on every pull and
@@ -42,8 +46,7 @@ pull.
 default branch. It holds only `contexts/<project>/` folders.
 
 **2. Create a fine-grained PAT** scoped to that repo, Repository permissions →
-**Contents: read**. Read is enough: the PC only pulls. Your threads push
-through their own GitHub connection, not this token.
+**Contents: read**. Read is enough: the PC only pulls.
 
 **3. Bootstrap the PC.** One line at a time in PowerShell. Replace
 `C:\claude-sync` with wherever you want the sync folder.
@@ -65,7 +68,43 @@ locally. Set `engineUrl` here too if you want anything other than the default.
 **5. Run it** from the desktop shortcut. A healthy run prints each project and
 `OK`.
 
-**6. Point each Claude project at its folder**, in the project's instructions:
+**6. Connect Claude to GitHub.** Threads reach the data repo through a custom
+connector pointed at GitHub's remote MCP server. It authenticates with a GitHub
+OAuth App you create — GitHub's server does not support dynamic client
+registration, so leaving the OAuth fields blank fails.
+
+On GitHub, Settings → Developer settings → **OAuth Apps** → New OAuth App.
+Not GitHub Apps; they sit next to each other and use an install flow this does
+not complete. Homepage URL can be anything. Authorization callback URL must be
+exactly:
+
+    https://claude.ai/api/mcp/auth_callback
+
+Register it, copy the Client ID, generate a client secret and copy that too —
+it is shown once.
+
+In Claude, Settings → Connectors → Add custom connector. URL:
+
+    https://api.githubcopilot.com/mcp/x/repos
+
+The `/x/repos` path selects the repository toolset. Put the Client ID and
+secret in Advanced settings, save, then Connect and authorize. Connectors can
+only be added from a browser, not the mobile app.
+
+Test it before going further: in a chat, enable the connector from the `+`
+menu and ask it to write a file to your data repo. A token that cannot see the
+repo returns 404 rather than a permission error, so a wrong scope looks like a
+wrong repo name.
+
+**Scope caveat.** OAuth App authorization is account-wide — the connector can
+reach every repo your GitHub account can, not just the data repo. There is no
+per-repo OAuth App. To contain it, authorize the connector as a separate GitHub
+account that is a collaborator on the data repo and nothing else; account-wide
+scope stops mattering when the account reaches one repo. GitHub permits one
+free machine account per person. Otherwise, blocking individual tools under
+Customize → Connectors limits what the connector can do, though not where.
+
+**7. Point each Claude project at its folder**, in the project's instructions:
 
     Context project: myproject (contexts/myproject/ in you/your-context-data).
     Requires the GitHub connector. If its tools are missing, enable it for
