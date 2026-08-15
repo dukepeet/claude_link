@@ -17,16 +17,25 @@ The repo is authoritative: files not in it get wiped locally.
 
 The split is the point: public code that says nothing about you, private data,
 and the token plus machine-specific paths staying on the machine that needs
-them. No repo holds a token.
+them. No repo holds a token. Nothing about how you use this needs to be
+public, so there is no reason to fork it — see below.
 
-## If you are forking this
+## Self-update
 
-The script self-updates from `$engineUrl` at the top of `pull-context.ps1`,
-which points at **this** repo. Taken as-is, your copy keeps pulling my script
-onto your machine forever — quietly overwriting your changes and running
-whatever I push. Edit `$engineUrl` to your own fork before you run anything,
-and fetch from your fork in step 3. The `dukepeet/claude_link` in the step 6
-stub only decides which README your threads read, so it is harmless either way.
+By default the script re-fetches itself from this repo on every pull and
+overwrites itself when the copy here differs. That means a change pushed here
+is the whole deployment — and also that code you do not control changes on your
+machine without you doing anything. Decide which you want:
+
+- **Leave it alone** to track this repo.
+- **`engineUrl = ''`** in `sync-config.psd1` pins the script you have. Nothing
+  self-updates; you re-fetch by hand when you choose.
+- **`engineUrl = '<your raw URL>'`** tracks your own copy instead, if you have
+  changed the engine and still want it deployed automatically.
+
+The setting lives in the config rather than in the script because the script
+overwrites itself — a value edited into the script would be undone on the next
+pull. That is also the only thing a fork was ever needed for.
 
 ## Setup
 
@@ -38,8 +47,7 @@ default branch. It holds only `contexts/<project>/` folders.
 through their own GitHub connection, not this token.
 
 **3. Bootstrap the PC.** One line at a time in PowerShell. Replace
-`C:\claude-sync` with wherever you want the sync folder, and
-`dukepeet/claude_link` with your fork.
+`C:\claude-sync` with wherever you want the sync folder.
 
     New-Item -ItemType Directory -Force C:\claude-sync | Out-Null; "PASTE_PAT" | Set-Content C:\claude-sync\pat.txt
 
@@ -53,13 +61,10 @@ through their own GitHub connection, not this token.
 
 **4. Edit `sync-config.psd1`.** Set `repo` to your data repo, and add a `map`
 entry per project: the folder name under `contexts/`, and where it lands
-locally.
+locally. Set `engineUrl` here too if you want anything other than the default.
 
 **5. Run it** from the desktop shortcut. A healthy run prints each project and
 `OK`.
-
-Nothing needs re-fetching after this. The script self-updates on every pull, so
-pushing a change here is the whole deployment.
 
 **6. Point each Claude project at its folder**, in the project's instructions:
 
@@ -143,8 +148,8 @@ reachable, skip it silently.
 The script reads `sync-config.psd1` and `pat.txt` from its own folder,
 downloads the data repo's zipball, and robocopies each mapped project into
 place. The config is `.psd1` rather than `.ps1` on purpose: it parses as data,
-so it can never execute anything. The script then self-updates from
-`$engineUrl`, overwriting itself only on a hash difference.
+so it can never execute anything. The script then self-updates, unless
+`engineUrl` is empty.
 
 `/MIR` is `/E` plus `/PURGE` — it deletes anything in a destination that the
 matching project folder does not hold. The script always excludes its own four
