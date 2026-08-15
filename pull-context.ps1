@@ -86,7 +86,9 @@ try {
         Flag "self-update skipped: fetched script looks truncated"
       } elseif ((Get-FileHash $fresh).Hash -ne (Get-FileHash $me).Hash) {
         Copy-Item $fresh $me -Force
-        Say "script updated from $engineUrl"
+        # the update lands after this run's work is already done, so the new code
+        # does not run until the next pull -- say so, or the change looks lost
+        Say "script updated from $engineUrl (takes effect next run)"
       }
     } catch {
       Flag "self-update skipped: $($_.Exception.Message)"
