@@ -77,6 +77,12 @@ without the raising thread doing it.
 - The owner name should read as a topic, so a thread that does not exist yet
   can still be the recipient.
 
+When the owner works in a **different** project, there is no folder you may
+write to — theirs is outside yours, and the repo root is too. Write the note
+and give it to the user to carry. That is the intended route, not a workaround:
+you frequently cannot name the destination project anyway, only the thing that
+owns the decision, and the user can.
+
 ## Writing straight to the PC
 
 If the thread can reach a project's local folder, write the same final content
