@@ -9,8 +9,10 @@ if (Get-Variable PSNativeCommandUseErrorActionPreference -EA 0) {
   $PSNativeCommandUseErrorActionPreference = $false
 }
 
-# Canonical home of this script. Public, so fetching it needs no token.
-$engineUrl = "https://raw.githubusercontent.com/dukepeet/claude_link/main/pull-context.ps1"
+# Where this machine gets its copy of this script. Overridable in sync-config.psd1,
+# which the self-update never touches -- editing it here would be undone on the next
+# pull. Set engineUrl = '' in the config to pin the script and stop self-updating.
+$engineUrlDefault = "https://raw.githubusercontent.com/dukepeet/claude_link/main/pull-context.ps1"
 
 # Everything machine-specific lives beside this script, never in a repo:
 # the token, and the config naming the data repo and where each project lands.
@@ -46,6 +48,9 @@ try {
   if (-not $cfg.map -or $cfg.map.Count -eq 0) { throw "sync-config.psd1: map has no entries" }
   if ($cfg.keep) { $keep = @($keep + $cfg.keep) | Select-Object -Unique }
 
+  # absent key -> default; present but empty -> self-update off
+  $engineUrl = if ($cfg.ContainsKey("engineUrl")) { "$($cfg.engineUrl)".Trim() } else { $engineUrlDefault }
+
   $tmp = "$env:TEMP\ctx"
   Remove-Item $tmp, "$tmp.zip" -Recurse -Force -EA 0
   Invoke-WebRequest "https://api.github.com/repos/$repo/zipball/main" -Headers @{Authorization="Bearer $pat"} -OutFile "$tmp.zip"
@@ -65,21 +70,25 @@ try {
     }
   }
 
-  # Self-update from the public repo. Best effort: a failure here must not fail the
-  # pull, and the next run retries.
-  try {
-    $fresh = "$env:TEMP\pull-context.new"
-    Remove-Item $fresh -Force -EA 0
-    Invoke-WebRequest $engineUrl -OutFile $fresh
-    $me = Join-Path $PSScriptRoot "pull-context.ps1"
-    if ((Get-Item $fresh).Length -lt 500) {
-      Flag "self-update skipped: fetched script looks truncated"
-    } elseif ((Get-FileHash $fresh).Hash -ne (Get-FileHash $me).Hash) {
-      Copy-Item $fresh $me -Force
-      Say "script updated from the public repo"
+  # Self-update. Best effort: a failure here must not fail the pull, and the next
+  # run retries. Skipped entirely when engineUrl is empty.
+  if ([string]::IsNullOrWhiteSpace($engineUrl)) {
+    Say "self-update off (engineUrl empty)"
+  } else {
+    try {
+      $fresh = "$env:TEMP\pull-context.new"
+      Remove-Item $fresh -Force -EA 0
+      Invoke-WebRequest $engineUrl -OutFile $fresh
+      $me = Join-Path $PSScriptRoot "pull-context.ps1"
+      if ((Get-Item $fresh).Length -lt 500) {
+        Flag "self-update skipped: fetched script looks truncated"
+      } elseif ((Get-FileHash $fresh).Hash -ne (Get-FileHash $me).Hash) {
+        Copy-Item $fresh $me -Force
+        Say "script updated from $engineUrl"
+      }
+    } catch {
+      Flag "self-update skipped: $($_.Exception.Message)"
     }
-  } catch {
-    Flag "self-update skipped: $($_.Exception.Message)"
   }
 
   Say "OK"
