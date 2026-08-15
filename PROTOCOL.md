@@ -27,7 +27,9 @@ file, push it in the same turn — do not wait for the user to say "dump".
 1. List `contexts/<project>/` and its `handoffs/` before your first push. Reuse
    existing filenames exactly; never invent a variant of a name already there.
    Mention any handoffs you find — you cannot tell which are addressed to you,
-   so let the user say.
+   so let the user say. If the folder has a `README.md`, read it before adding,
+   moving, or renaming anything: that is where the project's own layout rules
+   live.
 2. Re-fetch every existing file you are about to overwrite, in the same turn as
    the push. A copy you read earlier in the thread does not count.
 3. Push full final content. Holding only part of a file, say so and skip it.
