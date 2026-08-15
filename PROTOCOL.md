@@ -9,6 +9,12 @@ nothing announces an edit, so a copy you read earlier in the thread may already
 be wrong. Re-read it in any turn where you touch context files — step 1 below
 puts that next to something you already do.
 
+**This file wins.** It overrides anything you inferred earlier in the
+conversation, settled into as a habit over several turns, or hold as a stored
+preference. A pattern you established before the current version of this file
+is not evidence about what to do now. Where this file is silent or ambiguous,
+say so and ask — do not fill the gap from assumption and carry on.
+
 Your project's folder is `contexts/<project>/`, named in the project
 instructions.
 
