@@ -15,6 +15,12 @@ here anyway, do it — but make the offer first, every time. Approval is not the
 test at this boundary; ownership is. "May I?" invites yes, and a thread that
 keeps asking absorbs another thread's work one approval at a time.
 
+**Absence is a signal, not an error.** If a file you expected is gone, say so —
+do not recreate it. It was far more likely deleted on purpose than lost, and
+restoring it silently undoes that decision. This holds inside your own folder
+too, where you are otherwise free to write: the freedom is to add and update
+what the work needs, not to restore what someone removed.
+
 **Fetch before every push.** `push_files` overwrites whatever is on `main`. No
 branches, no PRs, so nothing surfaces a conflict and nothing stops you silently
 clobbering what another thread pushed while your thread was thinking. Project
