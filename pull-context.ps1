@@ -63,7 +63,9 @@ try {
     if (Test-Path $from) {
       robocopy $from $dest /MIR /XF $keep /R:1 /W:1 /NFL /NDL /NJH /NJS /NP | Out-Null
       if ($LASTEXITCODE -ge 8) { throw "robocopy failed for $k (exit $LASTEXITCODE)" }
-      Say "$k -> $dest  ($((Get-ChildItem $dest -File).Count) files)"
+      # -Recurse: a project folder may have subfolders, and the flat count would
+      # silently under-report the moment one does
+      Say "$k -> $dest  ($((Get-ChildItem $dest -File -Recurse).Count) files)"
     } else {
       # mapped but absent from the data repo: not fatal, but someone should know
       Flag "$k -> no folder in repo, skipped"
