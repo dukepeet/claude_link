@@ -40,7 +40,25 @@ file, push it in the same turn — do not wait for the user to say "dump".
 Never put credentials, tokens, or machine-specific paths in the data repo.
 Those live in the sync folder on the PC, which no repo can see.
 
-Filenames: kebab-case slugs, `.md`.
+## What belongs here
+
+Notes, by default: markdown, kebab-case slugs, `.md`.
+
+Anything else the project needs is allowed — a config, a data file, a script —
+but everything under your folder lands on the user's drive at the next pull,
+so:
+
+- Ask before adding a file type the project does not already hold. The user
+  may not want it arriving on disk.
+- Executables and scripts only when the user asks for one. A `.ps1` that a
+  thread decided to write shows up on their machine looking like it belongs
+  there.
+- No binaries. They bloat the pulled archive and make the history unreadable.
+- No generated output that a script could rebuild locally. The repo is for
+  things worth carrying between threads.
+
+`/MIR` reverts local edits at the next pull, which is easy to forget for a
+file that invites editing in place, like a script. Say so when you add one.
 
 ## Handoffs
 
