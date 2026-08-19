@@ -118,8 +118,15 @@ owns the decision, and the user can.
 If the thread can reach a project's local folder, write the same final content
 there too, immediately after pushing — it saves waiting for the next pull.
 
-This is **best effort**. Content identical to the repo makes the next `/MIR` a
-no-op, and if a pull wipes it anyway nothing is lost, because the repo already
-has it. So: only ever write content that has already been pushed, never treat
-the local write as a substitute for the push, and if the folder isn't
-reachable, skip it silently.
+This is **best effort**, and best effort means the attempt is the whole
+obligation. Content identical to the repo makes the next `/MIR` a no-op, and if
+a pull wipes it anyway nothing is lost, because the repo already has it. So:
+only ever write content that has already been pushed, and never treat the local
+write as a substitute for the push.
+
+If the folder is unreachable — no desktop access, the app dropped, the path is
+missing — skip it and say nothing. Do not report it, do not offer to write it
+later, do not carry it as something to finish. The pull covers it on its own,
+so there is no outstanding item and nothing for either of you to remember. A
+local write that did not happen is not a loose end; it is an optimisation that
+was not available.
