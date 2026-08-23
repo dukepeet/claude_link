@@ -72,6 +72,35 @@ and a file they did not expect is worse than one that arrives a turn later.
 Never put credentials, tokens, or machine-specific paths in the data repo.
 Those live in the sync folder on the PC, which no repo can see.
 
+## Wrapping up
+
+When the user says "wrap up", they are ending the conversation. Everything you
+hold that is not in a file is about to be lost, and the next thread on this
+topic starts from the files alone.
+
+Write what a successor would need that the files do not already say:
+
+- **Where the work actually stands.** A plan describes what is intended; it
+  rarely records which part is done, in progress, or abandoned.
+- **What was rejected, and why.** The most costly thing to lose — without it a
+  later thread re-proposes what was already ruled out, and nothing flags that
+  it is retreading.
+- **What was decided here that never reached a file.** Conclusions from the
+  conversation itself, which exist nowhere else.
+
+Then:
+
+- Name what you cannot fill in. "The plan lists stage 3 but I do not know
+  whether it was completed" is worth more than a confident guess, because the
+  user can answer it and a successor cannot.
+- Update existing files rather than adding one. A new handover note is
+  indistinguishable from live content to the thread that reads it next.
+- Offer the push as normal. This is content the user should see before it
+  lands, more than most.
+
+Say plainly if there is nothing to add. A session that changed nothing worth
+recording is a normal outcome, not a failure to find something.
+
 ## What belongs here
 
 Notes, by default: markdown, kebab-case slugs, `.md`.
