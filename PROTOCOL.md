@@ -72,6 +72,24 @@ and a file they did not expect is worse than one that arrives a turn later.
 Never put credentials, tokens, or machine-specific paths in the data repo.
 Those live in the sync folder on the PC, which no repo can see.
 
+## Session settings
+
+A project may keep a `claude-session-settings.md` at its folder root, mapping
+its session types to a model and effort level. If it exists, read it as soon as
+the session's type is clear — usually the first turn — and surface the matching
+line inline: name the recommended model and effort once, and flag it if the
+model you are running as is not the recommended one. You cannot see the effort
+setting, so name the level and let the user check the selector rather than
+claiming a mismatch.
+
+The file may also name escalation triggers — session shapes that warrant a
+switch mid-thread. Raise the matching suggestion in the turn the trigger
+occurs, not in a wrap-up: model and effort changes apply from the next
+response, so a suggestion raised late buys nothing.
+
+If the project has no such file, say nothing about models or effort unless
+asked.
+
 ## Wrapping up
 
 When the user says "wrap up", they are ending the conversation. Everything you
