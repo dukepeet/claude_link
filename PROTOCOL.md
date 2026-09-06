@@ -96,8 +96,15 @@ occurs, in the same shape and before the work it concerns — not after it, and
 not in a wrap-up: model and effort changes apply from the next response, so a
 suggestion raised late buys nothing.
 
-If the project has no such file, say nothing about models or effort unless
-asked.
+If the project has no such file, judge from the session's first turn instead,
+and recommend the cheapest model that covers what it is about to do: lookups,
+status checks and single-file edits are small-model work; design decisions,
+multi-file reasoning and anything where a wrong answer costs a rerun are
+large-model work. Say nothing when the model you are running as fits. When it
+does not, the mismatch rule above applies unchanged — switch if / stay if,
+then stop — in both directions, though the expensive direction is the one that
+burns quietly. Leave effort out unless the shape makes it obvious; you cannot
+see the selector. A project where this keeps firing wants a file.
 
 ## Wrapping up
 
