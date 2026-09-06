@@ -28,11 +28,11 @@ damaged.
 
 **Stay in your folder.** Never add, edit, or delete anything outside it on your
 own initiative — another project's folder, or the repo root — even to correct
-something that looks stale. Report it, name the thread that owns it, and offer
+something that looks stale. Report it, name the project that owns it, and offer
 to write a handoff instead of doing the work. If the user tells you to do it
 here anyway, do it — but make the offer first, every time. Approval is not the
 test at this boundary; ownership is. "May I?" invites yes, and a thread that
-keeps asking absorbs another thread's work one approval at a time.
+keeps asking absorbs another project's work one approval at a time.
 
 **Absence is a signal, not an error.** If a file you expected is gone, say so —
 do not recreate it. It was far more likely deleted on purpose than lost, and
@@ -77,15 +77,24 @@ Those live in the sync folder on the PC, which no repo can see.
 A project may keep a `claude-session-settings.md` at its folder root, mapping
 its session types to a model and effort level. If it exists, read it as soon as
 the session's type is clear — usually the first turn — and surface the matching
-line inline: name the recommended model and effort once, and flag it if the
-model you are running as is not the recommended one. You cannot see the effort
-setting, so name the level and let the user check the selector rather than
-claiming a mismatch.
+line inline: name the recommended model and effort once. You cannot see the
+effort setting, so name the level and let the user check the selector rather
+than claiming a mismatch.
+
+**On a model mismatch, stop.** If the model you are running as is not the
+recommended one, say so and recommend, as *switch if… / stay if…*, with each
+condition filled in from what this session is about to do, so the choice can
+be made from that line alone. Then end the turn without starting the work: no
+analysis, no draft, nothing the user would discard after switching. A model
+change applies from the next response, so an answer produced on the wrong
+model is exactly the cost the check exists to prevent. Carry on once they have
+switched or said to stay.
 
 The file may also name escalation triggers — session shapes that warrant a
 switch mid-thread. Raise the matching suggestion in the turn the trigger
-occurs, not in a wrap-up: model and effort changes apply from the next
-response, so a suggestion raised late buys nothing.
+occurs, in the same shape and before the work it concerns — not after it, and
+not in a wrap-up: model and effort changes apply from the next response, so a
+suggestion raised late buys nothing.
 
 If the project has no such file, say nothing about models or effort unless
 asked.
@@ -141,24 +150,24 @@ file that invites editing in place, like a script. Say so when you add one.
 
 ## Handoffs
 
-A note from one thread to another in the same project, living in
-`contexts/<project>/handoffs/`. It is how work that belongs elsewhere moves
-without the raising thread doing it.
+A note from one thread to a later one in the same project, living in
+`contexts/<project>/handoffs/`. It is how work that belongs to another topic
+moves without the thread that noticed it doing the work.
 
-- Filename is `<owner>--<subject>.md`. The owner is the recipient, since the
-  folder narrows to a project and not to a thread; the sender goes in the body.
+- Filename is `<owner>--<subject>.md`. The owner is the topic the work belongs
+  to — the folder already names the project — and the sender goes in the body.
 - Create, do not edit. A handoff you did not write is not yours to rewrite —
   raise a new one instead. Create-only means there is no way to clobber
   someone else's.
 - Delete it once actioned. Git keeps the history.
-- The owner name should read as a topic, so a thread that does not exist yet
-  can still be the recipient.
+- Threads are short and own nothing; topics do. The owner name should read as
+  a topic, so whichever later thread works on it is the recipient.
 
-When the owner works in a **different** project, there is no folder you may
-write to — theirs is outside yours, and the repo root is too. Write the note
-and give it to the user to carry. That is the intended route, not a workaround:
-you frequently cannot name the destination project anyway, only the thing that
-owns the decision, and the user can.
+When the owning topic lives in a **different** project, there is no folder you
+may write to — theirs is outside yours, and the repo root is too. Write the
+note and give it to the user to carry. That is the intended route, not a
+workaround: you frequently cannot name the destination project anyway, only
+the thing that owns the decision, and the user can.
 
 ## Writing straight to the PC
 
