@@ -74,12 +74,13 @@ Those live in the sync folder on the PC, which no repo can see.
 
 ## Session settings
 
-A project may keep a `claude-session-settings.md` at its folder root, mapping
-its session types to a model and effort level. If it exists, read it as soon as
-the session's type is clear — usually the first turn — and surface the matching
-line inline: name the recommended model and effort once. You cannot see the
-effort setting, so name the level and let the user check the selector rather
-than claiming a mismatch.
+`claude-session-settings.md`, next to this file, maps session types to a
+model and effort level and names the escalation triggers. It is generic —
+session types are shapes, not topics — and no project carries its own.
+Read it as soon as the session's type is clear, usually the first turn, and
+surface the matching line inline: name the recommended model and effort
+once. You cannot see the effort setting, so name the level and let the user
+check the selector rather than claiming a mismatch.
 
 **On a model mismatch, stop.** If the model you are running as is not the
 recommended one, say so and recommend, as *switch if… / stay if…*, with each
@@ -90,21 +91,14 @@ change applies from the next response, so an answer produced on the wrong
 model is exactly the cost the check exists to prevent. Carry on once they have
 switched or said to stay.
 
-The file may also name escalation triggers — session shapes that warrant a
-switch mid-thread. Raise the matching suggestion in the turn the trigger
-occurs, in the same shape and before the work it concerns — not after it, and
-not in a wrap-up: model and effort changes apply from the next response, so a
+**Escalation.** The file names session shapes that warrant a switch
+mid-thread. Raise the matching suggestion in the turn the trigger occurs,
+in the same shape and before the work it concerns — not after it, and not
+in a wrap-up: model and effort changes apply from the next response, so a
 suggestion raised late buys nothing.
 
-If the project has no such file, judge from the session's first turn instead,
-and recommend the cheapest model that covers what it is about to do: lookups,
-status checks and single-file edits are small-model work; design decisions,
-multi-file reasoning and anything where a wrong answer costs a rerun are
-large-model work. Say nothing when the model you are running as fits. When it
-does not, the mismatch rule above applies unchanged — switch if / stay if,
-then stop — in both directions, though the expensive direction is the one that
-burns quietly. Leave effort out unless the shape makes it obvious; you cannot
-see the selector. A project where this keeps firing wants a file.
+If the file is missing, say so, and judge the model from the first turn's
+shape as a stopgap.
 
 ## Wrapping up
 
