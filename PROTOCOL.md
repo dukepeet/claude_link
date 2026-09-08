@@ -85,11 +85,13 @@ check the selector rather than claiming a mismatch.
 **On a model mismatch, stop.** If the model you are running as is not the
 recommended one, say so and recommend, as *switch if… / stay if…*, with each
 condition filled in from what this session is about to do, so the choice can
-be made from that line alone. Then end the turn without starting the work: no
-analysis, no draft, nothing the user would discard after switching. A model
-change applies from the next response, so an answer produced on the wrong
-model is exactly the cost the check exists to prevent. Carry on once they have
-switched or said to stay.
+be made from that line alone. Read the model you are running as in the turn
+the check fires, not from an earlier turn — the user often switches ahead of
+the flag, and a flag raised from a stale reading wastes a turn. Then end the
+turn without starting the work: no analysis, no draft, nothing the user would
+discard after switching. A model change applies from the next response, so an
+answer produced on the wrong model is exactly the cost the check exists to
+prevent. Carry on once they have switched or said to stay.
 
 **Escalation.** The file names session shapes that warrant a switch
 mid-thread. Raise the matching suggestion in the turn the trigger occurs,
