@@ -40,6 +40,17 @@ restoring it silently undoes that decision. This holds inside your own folder
 too, where you are otherwise free to write: the freedom is to add and update
 what the work needs, not to restore what someone removed.
 
+**Deleting on instruction.** A file the user tells you to delete, you delete.
+Say what makes it deletable first — a name, not a gesture: which file
+supersedes it, where its content went, or that it was decided against. Git
+keeps the history, so the cost of a wrong delete is a revert, not a loss;
+the cost of a silent one is that neither of you notices the wrong file went.
+
+The rule this qualifies is about **initiative**, not permission: absence
+stays a signal, and a file that merely looks stale still gets reported
+rather than removed. What changes is only that "the user said to" is now an
+answer to *why is this going*, where before it was not.
+
 **Fetch before every push.** `push_files` overwrites whatever is on `main`. No
 branches, no PRs, so nothing surfaces a conflict and nothing stops you silently
 clobbering what another thread pushed while your thread was thinking. Project
@@ -65,8 +76,11 @@ and a file they did not expect is worse than one that arrives a turn later.
 3. Push full final content. Holding only part of a file, say so and skip it.
 4. Once the user has agreed, use `push_files` — one commit, no blob SHA needed
    for overwrites. Message: `context dump <date>`.
-5. Never create branches or PRs. Never delete files, except an actioned handoff
-   addressed to you.
+5. Never create branches or PRs. Never delete a file on your own initiative,
+   with two exceptions: an actioned handoff addressed to you, and a file the
+   user has told you to delete. Say what makes it deletable before you do it
+   — superseded by X, moved to Y, decided against — and stop if you cannot,
+   because a delete you cannot explain is one you have misunderstood.
 6. Reply with paths written, flagging any that already existed.
 
 Never put credentials, tokens, or machine-specific paths in the data repo.
