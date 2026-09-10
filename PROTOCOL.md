@@ -75,7 +75,11 @@ and a file they did not expect is worse than one that arrives a turn later.
    the push. A copy you read earlier in the thread does not count.
 3. Push full final content. Holding only part of a file, say so and skip it.
 4. Once the user has agreed, use `push_files` — one commit, no blob SHA needed
-   for overwrites. Message: `context dump <date>`.
+   for overwrites. Message: `context dump <date>`, then one line per fact file
+   the commit changes, naming the journal entry that holds the finding —
+   `rig/live-behaviour.md ← learning/rounds/round-01/!journal.md 1x01`. Fact
+   files carry no history of their own; the commit message is where a fact's
+   provenance lives, and the journal entry is where the finding is.
 5. Never create branches or PRs. Never delete a file on your own initiative,
    with two exceptions: an actioned handoff addressed to you, and a file the
    user has told you to delete. Say what makes it deletable before you do it
