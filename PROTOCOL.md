@@ -78,11 +78,13 @@ messages, below), never as `context dump <date>`.
 3. Push full final content. Holding only part of a file, say so and skip it.
 4. Once the user has agreed, use `push_files` — one commit, no blob SHA needed
    for overwrites. Message: a subject line (see Commit messages, below), then
-   one line per fact file the commit changes, naming the journal entry that
-   holds the finding —
-   `rig/live-behaviour.md ← learning/rounds/round-01/!journal.md 1x01`. Fact
-   files carry no history of their own; the commit message is where a fact's
-   provenance lives, and the journal entry is where the finding is.
+   one line per fact file the commit changes, naming where the finding behind
+   it is. In a project that keeps journals that is the journal entry —
+   `rig/live-behaviour.md ← learning/rounds/round-01/!journal.md 1x01`; with
+   no journal to name, give the finding's gist after the arrow. A commit with
+   no finding behind it — `fix`, `cleanup`, `move`, `delete` — has no body.
+   Fact files carry no history of their own; the commit message is where a
+   fact's provenance lives.
 5. Never create branches or PRs. Never delete a file on your own initiative,
    with two exceptions: an actioned handoff addressed to you, and a file the
    user has told you to delete. Say what makes it deletable before you do it
@@ -111,11 +113,13 @@ Two types always get a commit of their own:
 - `delete` — removes a file, with the reason step 5 asks for in the subject:
   `delete(music): claude-session-settings.md — superseded by engine copy`.
   `push_files` cannot delete, so this is a `delete_file` commit, one per file.
-- `move` — adds a file at its new path, naming both paths; the old path goes
-  in a `delete` that names the new one. History filtered by path stops at a
-  move, and those two subjects are where it picks up. Content stays
-  unchanged: a moved file lands as a whole-file add, so an edit made in the
-  same commit never shows as a diff. Edit it in a later commit.
+- `move` — renames or relocates a file, naming both paths. Ask the user to
+  do it in GitHub's web editor, and give them the subject to use: there it
+  is one server-side commit that git shows as a rename, at any file size.
+  Through the tool it is a whole-file re-push plus a `delete` naming the new
+  path — two commits, history split between them, and impossible for a file
+  too large to push — so do that only when the user asks. Either way,
+  content changes go in a separate commit, where they show as a diff.
 
 Everything else takes the first type that applies:
 
@@ -125,8 +129,10 @@ Everything else takes the first type that applies:
   A status line that progress overtook is `record`.
 - `record` — adds: a finding, a decision, progress.
 - `handoff` — creates a handoff.
-- `fix` — mends form, not content: a broken path, a typo, text restored
-  after an overwrite.
+- `fix` — repairs something broken, meaning unchanged: a broken path, a
+  typo, text restored after an overwrite.
+- `cleanup` — editorial only: rewording, tightening, reordering,
+  reformatting. Nothing was broken, and it all means what it meant before.
 
 ## Session settings
 
