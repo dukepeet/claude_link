@@ -62,7 +62,9 @@ it — do not sit on it until the user thinks to ask. But the push itself waits
 for their word. Name the paths and say what is going into each, so they know
 what would land before it does: a push reaches their machine at the next pull,
 and a file they did not expect is worse than one that arrives a turn later.
-"dump" stays valid as a manual catch-up for anything missed.
+"dump" stays valid as a manual catch-up for anything missed. It names the
+trigger, not the message: a dump is committed like any other push (see Commit
+messages, below), never as `context dump <date>`.
 
 1. Re-read this file, and list `contexts/<project>/` and its `handoffs/`, in
    every turn where you touch context files — not just the first. Reuse
@@ -75,8 +77,9 @@ and a file they did not expect is worse than one that arrives a turn later.
    the push. A copy you read earlier in the thread does not count.
 3. Push full final content. Holding only part of a file, say so and skip it.
 4. Once the user has agreed, use `push_files` — one commit, no blob SHA needed
-   for overwrites. Message: `context dump <date>`, then one line per fact file
-   the commit changes, naming the journal entry that holds the finding —
+   for overwrites. Message: a subject line (see Commit messages, below), then
+   one line per fact file the commit changes, naming the journal entry that
+   holds the finding —
    `rig/live-behaviour.md ← learning/rounds/round-01/!journal.md 1x01`. Fact
    files carry no history of their own; the commit message is where a fact's
    provenance lives, and the journal entry is where the finding is.
@@ -89,6 +92,41 @@ and a file they did not expect is worse than one that arrives a turn later.
 
 Never put credentials, tokens, or machine-specific paths in the data repo.
 Those live in the sync folder on the PC, which no repo can see.
+
+## Commit messages
+
+Every commit you make in the data repo takes the subject
+`<type>(<project>): <what changed>`. A later thread reads the log to decide
+which commit to open, so name the change, not the file it went into: the
+finding or decision itself, not `update live-behaviour.md`. Keep it to about
+70 characters — log views cut the rest — and leave out the date, which git
+records.
+
+The type is what the commit does, not which kind of file it touches. The
+paths already show that, and one finding often lands in a journal and a fact
+file in the same commit.
+
+Two types always get a commit of their own:
+
+- `delete` — removes a file, with the reason step 5 asks for in the subject:
+  `delete(music): claude-session-settings.md — superseded by engine copy`.
+  `push_files` cannot delete, so this is a `delete_file` commit, one per file.
+- `move` — adds a file at its new path, naming both paths; the old path goes
+  in a `delete` that names the new one. History filtered by path stops at a
+  move, and those two subjects are where it picks up. Content stays
+  unchanged: a moved file lands as a whole-file add, so an edit made in the
+  same commit never shows as a diff. Edit it in a later commit.
+
+Everything else takes the first type that applies:
+
+- `revise` — takes back something settled: a decision reversed, a plan
+  reframed, a rule or term retired, a fact that proved wrong. A thread may
+  still be acting on the old version; this type is what flags it in the log.
+  A status line that progress overtook is `record`.
+- `record` — adds: a finding, a decision, progress.
+- `handoff` — creates a handoff.
+- `fix` — mends form, not content: a broken path, a typo, text restored
+  after an overwrite.
 
 ## Session settings
 
