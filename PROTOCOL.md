@@ -98,11 +98,11 @@ Those live in the sync folder on the PC, which no repo can see.
 ## Commit messages
 
 Every commit you make in the data repo takes the subject
-`<type>(<project>): <what changed>`. A later thread reads the log to decide
-which commit to open, so name the change, not the file it went into: the
-finding or decision itself, not `update live-behaviour.md`. Keep it to about
-70 characters — log views cut the rest — and leave out the date, which git
-records.
+`<type>: <what changed>`. A later thread reads the log to decide which commit
+to open, so name the change, not the file it went into: the finding or
+decision itself, not `update live-behaviour.md`. Keep it to about 70
+characters — log views cut the rest — and leave out the date, which git
+records, and the project, which the paths do.
 
 The type is what the commit does, not which kind of file it touches. The
 paths already show that, and one finding often lands in a journal and a fact
@@ -111,7 +111,7 @@ file in the same commit.
 Two types always get a commit of their own:
 
 - `delete` — removes a file, with the reason step 5 asks for in the subject:
-  `delete(music): claude-session-settings.md — superseded by engine copy`.
+  `delete: claude-session-settings.md — superseded by engine copy`.
   `push_files` cannot delete, so this is a `delete_file` commit, one per file.
 - `move` — renames or relocates a file, naming both paths. Ask the user to
   do it in GitHub's web editor, and give them the subject to use: there it
