@@ -63,6 +63,18 @@ branches, no PRs, so nothing surfaces a conflict and nothing stops you silently
 clobbering what another thread pushed while your thread was thinking. Project
 knowledge and anything you read earlier in the thread may already be stale.
 
+**Read the diff after every push.** An overwrite is the whole file retyped
+from what you read, so a dropped line, a silent reword, or a truncated
+payload lands looking exactly like a clean push — the tool reports a SHA and
+a size either way. Call `get_commit` with `detail: "full_patch"` on the
+commit you just made, and read the patch before you reply. A unified diff
+costs what changed, not what the file weighs, so this is cheap on a clean
+push and only gets expensive when something went wrong. Clean diff — only
+the hunks you intended — say so. Unexpected hunks: name them, and ask the
+user to revert in GitHub and take the edit in the web editor. Never re-push
+a correction. A second hand-copy fails the way the first one did, and the
+log carries both.
+
 **Offer the push immediately; wait to make it.** Every time you write or
 substantially rewrite a context file, say so in the same turn and offer to push
 it — do not sit on it until the user thinks to ask. But the push itself waits
