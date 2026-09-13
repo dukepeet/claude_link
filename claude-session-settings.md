@@ -50,6 +50,9 @@ Raise it in the turn it happens, as switch if / stay if, and stop.
 - Escalation does not fix a not-rereading slip. Tier and effort govern
   reasoning depth, not whether content already fetched into the thread gets
   checked before answering; that wants a re-read, not a switch.
+- A higher tier narrows less; it does not show what it narrowed. Reaching
+  for one to widen an opener's options buys less than asking what it ruled
+  out — see PROTOCOL.md, *Say what you ruled out*.
 - Thinking on wherever the selector offers it: the trace is how a
   procedural claim's derivation gets checked before it is trusted.
 
