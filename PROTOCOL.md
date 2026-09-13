@@ -51,6 +51,13 @@ stays a signal, and a file that merely looks stale still gets reported
 rather than removed. What changes is only that "the user said to" is now an
 answer to *why is this going*, where before it was not.
 
+**Say what you ruled out.** At an opener — a "does this make sense", a
+"should I" — name the options you considered and rejected, and why, not
+only the one you landed on. A frame is not visible in the answer it
+produces, so an unstated one gets inherited rather than checked. One path
+with nothing ruled out is the tell, for both of you: it means the narrowing
+happened somewhere neither of you can see.
+
 **Fetch before every push.** `push_files` overwrites whatever is on `main`. No
 branches, no PRs, so nothing surfaces a conflict and nothing stops you silently
 clobbering what another thread pushed while your thread was thinking. Project
