@@ -73,13 +73,11 @@ and a file they did not expect is worse than one that arrives a turn later.
 trigger, not the message: a dump is committed like any other push (see Commit
 messages, below), never as `context dump <date>`.
 
-1. Re-read this file, and list `contexts/<project>/` and its `handoffs/`, in
-   every turn where you touch context files — not just the first. Reuse
-   existing filenames exactly; never invent a variant of a name already there.
-   Mention any handoffs you find — you cannot tell which are addressed to you,
-   so let the user say. If the folder has a `README.md`, read it before adding,
-   moving, or renaming anything: that is where the project's own layout rules
-   live.
+1. Re-read this file, and list `contexts/<project>/`, in every turn where you
+   touch context files — not just the first. Reuse existing filenames exactly;
+   never invent a variant of a name already there. If the folder has a
+   `README.md`, read it before adding, moving, or renaming anything: that is
+   where the project's own layout rules live.
 2. Re-fetch every existing file you are about to overwrite, in the same turn as
    the push. A copy you read earlier in the thread does not count.
 3. Push full final content. Holding only part of a file, say so and skip it.
@@ -222,24 +220,13 @@ file that invites editing in place, like a script. Say so when you add one.
 
 ## Handoffs
 
-A note from one thread to a later one in the same project, living in
-`contexts/<project>/handoffs/`. It is how work that belongs to another topic
-moves without the thread that noticed it doing the work.
-
-- Filename is `<owner>--<subject>.md`. The owner is the topic the work belongs
-  to — the folder already names the project — and the sender goes in the body.
-- Create, do not edit. A handoff you did not write is not yours to rewrite —
-  raise a new one instead. Create-only means there is no way to clobber
-  someone else's.
-- Delete it once actioned. Git keeps the history.
-- Threads are short and own nothing; topics do. The owner name should read as
-  a topic, so whichever later thread works on it is the recipient.
-
-When the owning topic lives in a **different** project, there is no folder you
-may write to — theirs is outside yours, and the repo root is too. Write the
-note and give it to the user to carry. That is the intended route, not a
-workaround: you frequently cannot name the destination project anyway, only
-the thing that owns the decision, and the user can.
+A note from a thread in one project to the topic in **another** project that
+owns the work — the only kind there still is, now that nothing inside a
+project routes between its own threads by owner. There is no folder you may
+write to for it: the other project's folder is outside yours, and the repo
+root is too. Write the note and give it to the user to carry. That is the
+intended route, not a workaround: you frequently cannot name the destination
+project anyway, only the thing that owns the decision, and the user can.
 
 ## Writing straight to the PC
 
