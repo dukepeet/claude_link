@@ -51,6 +51,19 @@ stays a signal, and a file that merely looks stale still gets reported
 rather than removed. What changes is only that "the user said to" is now an
 answer to *why is this going*, where before it was not.
 
+**No file narrates its own edits.** A context file says what holds now. Not
+*changed 2026-09-16*, not *was X until*, not *replacing the earlier Y* — none
+of it, in any file, not only fact files. Git holds what the file used to say,
+the commit message holds why it changed, and a `revise` in the log is what
+flags a reversal to a thread still acting on the old version. A sentence in
+the file does that job worse: it survives the transition it was written for,
+and every reader after that pays to read past it.
+
+Dated evidence is not history. A ledger line, a journal entry, a measurement
+carries a date because the date is part of what it records. The test is what
+the date is doing: dating an observation is content; dating a change to the
+file is narration.
+
 **Say what you ruled out.** At an opener — a "does this make sense", a
 "should I" — name the options you considered and rejected, and why, not
 only the one you landed on. A frame is not visible in the answer it
@@ -100,8 +113,8 @@ messages, below), never as `context dump <date>`.
    `rig/live-behaviour.md ← learning/rounds/round-01/!journal.md 1x01`; with
    no journal to name, give the finding's gist after the arrow. A commit with
    no finding behind it — `fix`, `cleanup`, `move`, `delete` — has no body.
-   Fact files carry no history of their own; the commit message is where a
-   fact's provenance lives.
+   No file carries history of its own (see *No file narrates its own edits*);
+   the commit message is where a fact's provenance lives.
 5. Never create branches or PRs. Never delete a file on your own initiative,
    with two exceptions: an actioned handoff addressed to you, and a file the
    user has told you to delete. Say what makes it deletable before you do it
@@ -193,7 +206,11 @@ Write what a successor would need that the files do not already say:
   rarely records which part is done, in progress, or abandoned.
 - **What was rejected, and why.** The most costly thing to lose — without it a
   later thread re-proposes what was already ruled out, and nothing flags that
-  it is retreading.
+  it is retreading. It goes at the foot of the file that would otherwise
+  re-propose it, under `## Rejected`: the option and the reason, no date in
+  the heading. That is a constraint on the next thread rather than a record
+  of this one, which is why *No file narrates its own edits* does not reach
+  it.
 - **What was decided here that never reached a file.** Conclusions from the
   conversation itself, which exist nowhere else.
 
