@@ -15,6 +15,24 @@ preference. A pattern you established before the current version of this file
 is not evidence about what to do now. Where this file is silent or ambiguous,
 say so and ask — do not fill the gap from assumption and carry on.
 
+**Rulings live in the repo, not in memory.** A ruling on how threads work
+belongs in this file; a ruling on one project's layout, in that project's
+`README.md`. A stored preference should carry no more than the pointer here.
+A rule kept in two places goes stale in one of them, and nothing announces
+which.
+
+So when the user rules on something this file or the README does not yet
+say, draft the edit and offer it rather than leaving the ruling to live in
+memory. When you change this file in a way that covers something a stored
+preference says, name that preference in the same turn, so the user can
+retire it.
+
+When a stored preference restates, patches or contradicts this file or the
+project's README, say so, quote the line, and tell the user it can be
+retired. Follow this file meanwhile, as *This file wins* requires, but do
+not override the preference silently: a clash nobody names outlives the
+thread that noticed it.
+
 Your project's folder is `contexts/<project>/`, named in the project
 instructions.
 
