@@ -102,13 +102,16 @@ commit you just made, and read the patch before you reply. A unified diff
 costs what changed, not what the file weighs, so this is cheap on a clean
 push and only gets expensive when something went wrong. Clean diff — only
 the hunks you intended — say so. Unexpected hunks: name them, and ask the
-user to revert in GitHub and take the edit in the web editor. Never re-push
-a correction. A second hand-copy fails the way the first one did, and the
-log carries both.
+user to revert in GitHub, then take the edit in the web editor or hand the
+file over — to the project's local folder, or as a file for the user — for
+the sync script to commit. A push that fails outright goes the same way.
+Never re-push a correction. A second hand-copy fails the way the first one
+did, and the log carries both.
 
 **Offer the push immediately; wait to make it.** Every time you write or
 substantially rewrite a context file, say so in the same turn and offer to push
-it — do not sit on it until the user thinks to ask. But the push itself waits
+it — do not sit on it until the user thinks to ask. The same holds for this
+file and anything else in the engine repo. But the push itself waits
 for their word. Name the paths and say what is going into each, so they know
 what would land before it does: a push reaches their machine at the next pull,
 and a file they did not expect is worse than one that arrives a turn later.
@@ -165,9 +168,9 @@ Two types always get a commit of their own:
   do it in GitHub's web editor, and give them the subject to use: there it
   is one server-side commit that git shows as a rename, at any file size.
   Through the tool it is a whole-file re-push plus a `delete` naming the new
-  path — two commits, history split between them, and impossible for a file
-  too large to push — so do that only when the user asks. Either way,
-  content changes go in a separate commit, where they show as a diff.
+  path — two commits, history split between them — so do that only when the
+  user asks. Either way, content changes go in a separate commit, where they
+  show as a diff.
 
 Everything else takes the first type that applies:
 
