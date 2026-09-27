@@ -36,6 +36,10 @@ thread that noticed it.
 Your project's folder is `contexts/<project>/`, named in the project
 instructions.
 
+A thread outside any project has no folder. It may read anything, writes
+nothing on its own, and gives what it finds to the user to carry to the
+owning project.
+
 **The repo is the only store.** Context files live there, and on the user's PC
 via the pull. Never write them into the claude.ai project's knowledge: nothing
 syncs the two, so a copy there goes stale the moment the repo moves on, and it
