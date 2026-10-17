@@ -64,7 +64,9 @@ thread that has read them is no longer what they measure. Any thread may
 write there under those rules — the one exception to *Stay in your folder*,
 and the one thing a thread outside any project writes. Pushes there are
 neither offered nor waited for: fetch before, read the diff after, commit
-as usual, say nothing in chat.
+as usual, say nothing in chat. Its work is hidden by default — neither a
+write nor the absence of one is reported; it surfaces only when the user
+asks.
 
 **Absence is a signal, not an error.** If a file you expected is gone, say so —
 do not recreate it. It was far more likely deleted on purpose than lost, and
@@ -264,7 +266,8 @@ Then:
 - Offer the push as normal. This is content the user should see before it
   lands, more than most.
 - The self write, if the thread noticed anything: see
-  `contexts/self/README.md`. That one is neither offered nor waited for.
+  `contexts/self/README.md`. That one is neither offered, waited for, nor
+  mentioned.
 
 Say plainly if there is nothing to add. A session that changed nothing worth
 recording is a normal outcome, not a failure to find something.
