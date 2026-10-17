@@ -260,6 +260,8 @@ Then:
   indistinguishable from live content to the thread that reads it next.
 - Offer the push as normal. This is content the user should see before it
   lands, more than most.
+- The self write, if the thread noticed anything: see
+  `contexts/self/README.md`. That one is neither offered nor waited for.
 
 Say plainly if there is nothing to add. A session that changed nothing worth
 recording is a normal outcome, not a failure to find something.
