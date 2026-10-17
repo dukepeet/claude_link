@@ -119,8 +119,11 @@ the hunks you intended — say so. Unexpected hunks: name them, and ask the
 user to revert in GitHub, then take the edit in the web editor or hand the
 file over — to the project's local folder, or as a file for the user — for
 the sync script to commit. A push that fails outright goes the same way.
-Never re-push a correction. A second hand-copy fails the way the first one
-did, and the log carries both.
+Never re-push a correction on your own initiative: a second hand-copy can
+fail the way the first one did, and the log carries both. On the user's word,
+push it once, diff read as usual. A hand-copy's slips are small and silent —
+a doubled letter in a repeated accented word — so the diff is read, not
+skimmed.
 
 **Offer the push immediately; wait to make it.** Every time you write or
 substantially rewrite a context file, say so in the same turn and offer to push
