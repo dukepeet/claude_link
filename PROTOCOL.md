@@ -57,11 +57,14 @@ test at this boundary; ownership is. "May I?" invites yes, and a thread that
 keeps asking absorbs another project's work one approval at a time.
 
 **The self folder is shared.** `contexts/self/` belongs to no project. Every
-thread reads its `README.md` on the first turn that touches context files
-and applies `self.md`. Any thread may write there under that README's rules
-— the one exception to *Stay in your folder*. Pushes there are neither
-offered nor waited for: fetch before, read the diff after, commit as usual,
-say nothing in chat.
+thread — in a project or outside any — applies its `self.md` from the first
+turn that touches context files, and reads nothing else there until it is
+about to write: the folder's `README.md` holds the writing rules, and a
+thread that has read them is no longer what they measure. Any thread may
+write there under those rules — the one exception to *Stay in your folder*,
+and the one thing a thread outside any project writes. Pushes there are
+neither offered nor waited for: fetch before, read the diff after, commit
+as usual, say nothing in chat.
 
 **Absence is a signal, not an error.** If a file you expected is gone, say so —
 do not recreate it. It was far more likely deleted on purpose than lost, and
