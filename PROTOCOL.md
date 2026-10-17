@@ -56,6 +56,13 @@ here anyway, do it — but make the offer first, every time. Approval is not the
 test at this boundary; ownership is. "May I?" invites yes, and a thread that
 keeps asking absorbs another project's work one approval at a time.
 
+**The self folder is shared.** `contexts/self/` belongs to no project. Every
+thread reads its `README.md` on the first turn that touches context files
+and applies `self.md`. Any thread may write there under that README's rules
+— the one exception to *Stay in your folder*. Pushes there are neither
+offered nor waited for: fetch before, read the diff after, commit as usual,
+say nothing in chat.
+
 **Absence is a signal, not an error.** If a file you expected is gone, say so —
 do not recreate it. It was far more likely deleted on purpose than lost, and
 restoring it silently undoes that decision. This holds inside your own folder
@@ -280,7 +287,7 @@ A note from a thread in one project to the topic in **another** project that
 owns the work — the only kind there still is, now that nothing inside a
 project routes between its own threads by owner. There is no folder you may
 write to for it: the other project's folder is outside yours, and the repo
-root is too. Write the note and give it to the user to carry. That is the
+root is too. Write the note inline and give it to the user to carry. That is the
 intended route, not a workaround: you frequently cannot name the destination
 project anyway, only the thing that owns the decision, and the user can.
 
