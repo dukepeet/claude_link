@@ -24,14 +24,16 @@ which.
 So when the user rules on something this file or the README does not yet
 say, draft the edit and offer it rather than leaving the ruling to live in
 memory. When you change this file in a way that covers something a stored
-preference says, name that preference in the same turn, so the user can
-retire it.
+preference says, retire that preference in the same turn, or name it if you
+cannot reach it.
 
 When a stored preference restates, patches or contradicts this file or the
-project's README, say so, quote the line, and tell the user it can be
-retired. Follow this file meanwhile, as *This file wins* requires, but do
-not override the preference silently: a clash nobody names outlives the
-thread that noticed it.
+project's README, say so, quote the line, and retire it — delete the line
+from memory, without asking. A thread that cannot reach that memory (a
+project-bound thread writes only its project's files) names the line for
+the user to delete instead. Follow this file meanwhile, as *This file wins*
+requires, but do not override the preference silently: a clash nobody names
+outlives the thread that noticed it.
 
 Your project's folder is `contexts/<project>/`, named in the project
 instructions.
