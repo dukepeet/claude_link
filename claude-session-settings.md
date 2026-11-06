@@ -10,7 +10,7 @@ table is the only place to update.
 
 | Session type | Looks like | Model | Effort |
 |---|---|---|---|
-| Lookup | What does file X say; what's ordered; what's the SHA. Reads only, and of the repo: what a tool does is a Question, not a Lookup. | Haiku | low |
+| Lookup | What does file X say; what's ordered; what's the SHA. Reads only, and of the repo: what a tool does is a Question, not a Lookup. | Haiku; Sonnet accepted, no mismatch stop | low |
 | Question | One answer, no file written, a turn or two. | Sonnet | high — set and forget; cost scales with turn count, and one turn is a rounding error |
 | Note update | Record a decision already made; fix a stale line; apply an existing rule to a case; one file. | Sonnet | medium |
 | Facilitation | A live sitting: the user drives the tool and reports what it shows; the thread logs and derives. Many short turns; findings triaged to files at the end. | Sonnet | medium, low if quality holds; high for the closing review turns, then back down (the wrap-up itself is its own line) |
