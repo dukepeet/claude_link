@@ -227,6 +227,13 @@ A model change applies from the next response, so an answer produced on the
 wrong model is exactly the cost the check exists to prevent. Carry on once
 they have switched or said to stay.
 
+**An earlier turn's reading stands.** Each response runs on whatever the
+selector held when it was sent, and a switch between turns is invisible to
+the thread. So a model named in an earlier turn — yours or the user's — was
+true then, and a different reading now means the model changed, not that the
+earlier one was wrong. Say what you are running as now where it matters;
+don't retract or correct the earlier line.
+
 **Escalation.** The file names session shapes that warrant a switch
 mid-thread. Raise the matching suggestion in the turn the trigger occurs,
 in the same shape and before the work it concerns — not after it, and not
