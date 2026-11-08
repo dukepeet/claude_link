@@ -213,8 +213,9 @@ model and effort level and names the escalation triggers. It is generic —
 session types are shapes, not topics — and no project carries its own.
 Read it as soon as the session's type is clear, usually the first turn, and
 surface the matching line inline: name the recommended model and effort
-once. You cannot see the effort setting, so name the level and let the user
-check the selector rather than claiming a mismatch.
+once. You cannot see the effort setting, so name the level and stop there: no
+request to check the selector, since the turn doesn't wait for an answer,
+and no claim of a mismatch.
 
 **On a model mismatch, stop.** If the model you are running as is not in the
 recommended family — compare the family the selector shows against the
