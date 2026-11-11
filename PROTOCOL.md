@@ -100,6 +100,11 @@ carries a date because the date is part of what it records. The test is what
 the date is doing: dating an observation is content; dating a change to the
 file is narration.
 
+**A file holds what its scope covers.** A reference file takes what holds
+everywhere it applies; a value from one piece of work — one Set, one
+session, one purchase — belongs to that work's record. What can be read on
+demand from a tool or its documentation isn't restated.
+
 **Say what you ruled out.** At an opener — a "does this make sense", a
 "should I" — name the options you considered and rejected, and why, not
 only the one you landed on. A frame is not visible in the answer it
