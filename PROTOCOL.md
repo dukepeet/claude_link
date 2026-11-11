@@ -105,6 +105,29 @@ everywhere it applies; a value from one piece of work — one Set, one
 session, one purchase — belongs to that work's record. What can be read on
 demand from a tool or its documentation isn't restated.
 
+**Record what a successor could not get back.** A line earns its place
+when a later thread, without it, would decide wrongly or redo real work.
+Not when it would only have to look, or ask the user one question. So
+decisions, rules, rejections and findings that cost work to reach
+belong. So do inventories of what the user owns or has installed, when
+threads keep needing them. When in doubt, ask.
+
+State that moves by itself or by someone else — an auto-updating build,
+today's price, a collaborator's software — stays out, and being acted on
+or observed does not bring it in. What that state led to is what gets
+recorded: the finding or the decision, with the state as its dated
+reason at most. A thread that needs the state itself reads it, or asks
+the user when it comes up.
+
+A project's README can rule either way: scope in state that moves by
+itself, or rule content out however it behaves. A scoped-in line carries
+the date it was last read and is a prompt, not a fact. A thread that can
+read the source re-reads it before relying on it and corrects the line
+in its next push to that file; one that cannot asks the user.
+Credentials, tokens and machine-specific paths stay out always.
+
+This bounds *Wrapping up* too.
+
 **Say what you ruled out.** At an opener — a "does this make sense", a
 "should I" — name the options you considered and rejected, and why, not
 only the one you landed on. A frame is not visible in the answer it
